@@ -16,3 +16,16 @@ function search(nums: number[], target: number): number {
   }
   return -1;
 }
+
+// Recursive solution
+function search2(nums: number[], target: number, left=0, right=nums.length-1): number {
+  if (left > right) return -1;
+
+  const mid = left + Math.floor((right - left) / 2);
+
+  if (nums[mid] < target) return search2(nums, target, mid + 1, right);
+
+  if (nums[mid] > target) return search2(nums, target, left, mid - 1);
+
+  return mid;
+}
