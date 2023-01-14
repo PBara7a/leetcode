@@ -13,5 +13,19 @@ function twoSum(nums: number[], target: number): number[] {
     numsMap[nums[i]] = i;
   }
 
-  return [0, 0];
+  return [];
+}
+
+// Recursive solution
+function twoSum2(nums: number[], target: number, start=0, end=nums.length-1, numsMap: Record<number, number> = {}): number[] {
+  if (start === end) return []
+
+  numsMap[nums[start]] = start;
+  const dif: number = target - nums[start+1];
+
+  if (dif in numsMap) {
+    return [numsMap[dif], start+1]
+  }
+
+  return twoSum2(nums, target, start+1, end, numsMap)
 }
