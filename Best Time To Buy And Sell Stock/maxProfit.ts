@@ -14,3 +14,17 @@ function maxProfit(prices: number[]): number {
   }
   return maxProfit;
 }
+
+// Recursive solution
+function maxProfit2(prices: number[], buyIndex=0, sellIndex=1, maxGains=0): number {
+  if (sellIndex === prices.length) return maxGains;
+
+  if (prices[buyIndex] < prices[sellIndex]) {
+    const profit = prices[sellIndex] - prices[buyIndex];
+    maxGains = profit > maxGains ? profit : maxGains;
+  } else {
+    buyIndex = sellIndex;
+  }
+
+  return maxProfit2(prices, buyIndex, sellIndex+1, maxGains);
+}
