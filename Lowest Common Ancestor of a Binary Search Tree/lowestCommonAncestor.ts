@@ -9,11 +9,7 @@
 //   }
 // }
 
-function lowestCommonAncestor(
-  root: TreeNode | null,
-  p: TreeNode | null,
-  q: TreeNode | null
-): TreeNode | null {
+function lowestCommonAncestor(root: TreeNode | null, p: TreeNode | null, q: TreeNode | null): TreeNode | null {
   let currentNode = root;
 
   while (currentNode && p && q) {
@@ -26,4 +22,24 @@ function lowestCommonAncestor(
     }
   }
   return null;
+}
+
+// Recursive solution
+function lowestCommonAncestor2(root: TreeNode | null, p: TreeNode | null, q: TreeNode | null): TreeNode | null {
+  if (!p || !q) return null;
+
+  function innerFunc(currentNode: TreeNode | null): TreeNode | null {
+    if (!currentNode) return null;
+
+    if (p!.val > currentNode.val && q!.val > currentNode.val) {
+      return innerFunc(currentNode.right);
+    }
+
+    if (p!.val < currentNode.val && q!.val < currentNode.val) {
+      return innerFunc(currentNode.left);
+    }
+    return currentNode;
+  }
+
+  return innerFunc(root);
 }
