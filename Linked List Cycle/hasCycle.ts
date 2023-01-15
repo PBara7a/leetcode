@@ -21,3 +21,18 @@ function hasCycle(head: ListNode | null): boolean {
   }
   return false;
 }
+
+// Recursive solution
+function hasCycle2(head: ListNode | null): boolean {
+  function innerFunc(slow: ListNode | null, fast: ListNode | null): boolean {
+    if (!fast || !fast.next) return false;
+
+    slow = slow!.next;
+    fast = fast.next.next;
+
+    if (slow === fast) return true;
+    return innerFunc(slow, fast);
+  }
+
+  return innerFunc(head, head);
+}
